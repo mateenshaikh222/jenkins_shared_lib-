@@ -1,9 +1,16 @@
 def call(String project, String ImageTag, String hubUser){
     
-    sh """
-     docker rmi ${hubUser}/${project}:${ImageTag}
-     docker rmi ${hubUser}/${project} ${hubUser}/${project}:latest
-    """
+    // sh """
+    
+    //  docker rmi ${hubUser}/${project}:${ImageTag}
+    //  docker rmi ${hubUser}/${project} ${hubUser}/${project}:latest
+    // """
+
+   // Remove the specified image tag, if it exists
+    sh "docker rmi ${hubUser}/${project}:${ImageTag} || true"
+
+    // Remove the 'latest' tag, if it exists
+    sh "docker rmi ${hubUser}/${project}:latest || true"
 }
 
 
